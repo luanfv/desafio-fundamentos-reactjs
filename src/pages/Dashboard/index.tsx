@@ -56,21 +56,21 @@ const Dashboard: React.FC = () => {
               <p>Entradas</p>
               <img src={income} alt="Income" />
             </header>
-            <h1 data-testid="balance-income">R$ {parseFloat(balance.income).toFixed(2)}</h1>
+            <h1 data-testid="balance-income">R$ {formatValue(parseFloat(balance.income))}</h1>
           </Card>
           <Card>
             <header>
               <p>Saídas</p>
               <img src={outcome} alt="Outcome" />
             </header>
-            <h1 data-testid="balance-outcome">R$ {parseFloat(balance.outcome).toFixed(2)}</h1>
+            <h1 data-testid="balance-outcome">R$ {formatValue(parseFloat(balance.outcome))}</h1>
           </Card>
           <Card total>
             <header>
               <p>Total</p>
               <img src={total} alt="Total" />
             </header>
-            <h1 data-testid="balance-total">R$ {parseFloat(balance.total).toFixed(2)}</h1>
+            <h1 data-testid="balance-total">R$ {formatValue(parseFloat(balance.total))}</h1>
           </Card>
         </CardContainer>
 
@@ -90,7 +90,7 @@ const Dashboard: React.FC = () => {
                 transactions.map(transaction => (
                   <tr key={transaction.id}>
                     <td className="title">{transaction.title}</td>
-                    <td className={transaction.type}>R$ {transaction.value}</td>
+                    <td className={transaction.type}>{transaction.type === 'outcome' && '-'} {formatValue(transaction.value)}</td>
                     <td>{transaction.category.title}</td>
                     <td>{new Date(transaction.created_at).toLocaleDateString('pt-br')}</td>
                   </tr>
